@@ -5,6 +5,7 @@ import ButtonPrimary from "@/app/components/ButtonPrimary";
 import FooterSection from "@/app/components/FooterSection";
 import React, { useEffect, useRef, useState } from "react";
 import Quiz from "@/app/components/quiz";
+import CountdownBox from "@/app/components/CountdownBox";
 import '@/app/globals.css'
 
 export default function AboutPage() {
@@ -702,82 +703,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-  // Countdown Box
-function CountdownBox() {
-  const [timeLeft, setTimeLeft] = useState("");
-
-  useEffect(() => {
-    const targetDate = new Date();
-    targetDate.setFullYear(targetDate.getFullYear() + 1);
-
-    const timer = setInterval(() => {
-      const now = Date.now();
-      const distance = targetDate - now;
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setTimeLeft(`${days}d : ${hours}h : ${minutes}m : ${seconds}s`);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-    return (
-      <>
-        <div className="countdown">
-          <div className="countdowntext">
-            <h2>Spark31 </h2>
-            <h4>What's possibly waiting for us?</h4>
-          </div>
-
-          <div className="actualcountdown">
-            <h2>{timeLeft}</h2>
-          </div>
-        </div>
-
-        <style jsx>{`
-          .countdown {
-            font-family: Georgia, serif;
-            border-radius: 20px;
-            color: black;
-            margin: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            height: 200px;
-            margin-bottom: 25px;
-            display: flex;
-            background-color: rgba(255, 153, 4, 0.1);
-          }
-
-          .countdowntext {
-            width: 30%;
-          }
-
-          .countdowntext h2 {
-            font-size: 40px;
-            padding: 15px;
-          }
-
-          .countdowntext h4 {
-            font-size: 16px;
-            padding: 15px;
-            padding-top: 5px;
-          }
-
-          .actualcountdown {
-            width: 60%;
-            margin: 20px;
-          }
-
-          .actualcountdown h2 {
-            font-size: 70px;
-            text-align: right;
-          }
-        `}</style>
-      </>
-    );
-  }
