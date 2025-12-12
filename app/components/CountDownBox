@@ -1,27 +1,26 @@
 "use client";
-import { useEffect, useState } from "react";
-
-let GLOBAL_TARGET_DATE = null; // persists across component remounts
+import { useEffect, useRef, useState } from "react";
 
 export default function CountdownBox() {
   const [timeLeft, setTimeLeft] = useState("");
+  const targetRef = useRef(null);
 
   useEffect(() => {
-    if (!GLOBAL_TARGET_DATE) {
+    if (!targetRef.current) {
       const saved = localStorage.getItem("spark31-countdown");
       if (saved) {
-        GLOBAL_TARGET_DATE = new Date(saved);
+        targetRef.current = new Date(saved);
       } else {
         const newDate = new Date();
         newDate.setFullYear(newDate.getFullYear() + 1);
         localStorage.setItem("spark31-countdown", newDate.toISOString());
-        GLOBAL_TARGET_DATE = newDate;
+        targetRef.current = newDate;
       }
     }
 
     const timer = setInterval(() => {
       const now = new Date();
-      const distance = GLOBAL_TARGET_DATE - now;
+      const distance = targetRef.current - now;
 
       if (distance <= 0) {
         setTimeLeft("0d : 0h : 0m : 0s");
@@ -52,6 +51,7 @@ export default function CountdownBox() {
     </div>
   );
 }
+
 
 
     return (
