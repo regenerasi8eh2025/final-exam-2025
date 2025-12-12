@@ -15,29 +15,30 @@ export default function AboutPage() {
   const [modalMember, setModalMember] = useState(null);
 
   // Countdown Box
-  function CountdownBox() {
-    const [timeLeft, setTimeLeft] = useState("");
+function CountdownBox() {
+  const [timeLeft, setTimeLeft] = useState("");
 
-    useEffect(() => {
-      const targetDate = new Date();
-      targetDate.setFullYear(targetDate.getFullYear() + 1);
+  useEffect(() => {
+    const targetDate = new Date();
+    targetDate.setFullYear(targetDate.getFullYear() + 1);
 
-      const timer = setInterval(() => {
-        const now = Date.now();
-        const distance = targetDate - now;
+    const timer = setInterval(() => {
+      const now = Date.now();
+      const distance = targetDate - now;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-        );
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        setTimeLeft(`${days}d : ${hours}h : ${minutes}m : ${seconds}s`);
-      }, 1000);
+      setTimeLeft(`${days}d : ${hours}h : ${minutes}m : ${seconds}s`);
+    }, 1000);
 
-      return () => clearInterval(timer);
-    }, []);
+    return () => clearInterval(timer);
+  }, []);
+
+  return <div>{timeLeft}</div>;
+}
 
     return (
       <>
