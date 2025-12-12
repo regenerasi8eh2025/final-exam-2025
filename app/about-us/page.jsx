@@ -726,9 +726,6 @@ function CountdownBox() {
     return () => clearInterval(timer);
   }, []);
 
-  return <div>{timeLeft}</div>;
-}
-
     return (
       <>
         <div className="countdown">
