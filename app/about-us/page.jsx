@@ -597,7 +597,7 @@ export default function AboutPage() {
                 <div className="polaroid w-64 transform -rotate-3 mb-6 md:mb-0">
                   <div className="tape bg-yellow-200/60"></div>
                   <img
-                    src="/about-us/img1.jpeg"
+                    src="/img1.jpeg"
                     alt="Trolls Trails~"
                   />
                   <div className="text-center mt-3 font-bold text-lg">
@@ -619,7 +619,7 @@ export default function AboutPage() {
                 <div className="polaroid w-64 transform rotate-2 mb-6 md:mb-0">
                   <div className="tape bg-pink-200/60"></div>
                   <img
-                    src="/about-us/img4.jpeg"
+                    src="/img4.jpeg"
                     alt="Fun Moments"
                   />
                   <div className="text-center mt-3 font-bold text-lg">
@@ -641,7 +641,7 @@ export default function AboutPage() {
                 <div className="polaroid w-64 transform -rotate-1 mb-6 md:mb-0">
                   <div className="tape bg-green-200/60"></div>
                   <img
-                    src="/about-us/img2.jpeg"
+                    src="/img2.jpeg"
                     alt="Happy Vibes"
                   />
                   <div className="text-center mt-3 font-bold text-lg">
