@@ -560,8 +560,7 @@ export default function AboutPage() {
                 Spark 31 Radio
               </h1>
               <p className="text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed opacity-95 mb-10 font-medium drop-shadow-sm">
-                Melahirkan keakraban, serta menciptakan percikan api semangat
-                keluarga ITB melalui radio kami.
+                Melahirkan keakraban dengan profesionalitas dari Cakru 31.
               </p>
               <div className="mt-10">
                 <button
@@ -586,11 +585,10 @@ export default function AboutPage() {
 
           <div className="relative z-10 scrapbook-font">
             <h2 className="text-center text-5xl font-bold mb-16 underline decoration-wavy decoration-[#ffab91]">
-              Our Journey
+               Our Journey
             </h2>
 
             <div className="relative max-w-4xl mx-auto">
-              {/* Garis Putus-putus Tengah */}
               <div className="timeline-line-custom hidden md:block"></div>
 
               {/* Momen 1 */}
@@ -599,20 +597,18 @@ export default function AboutPage() {
                 <div className="polaroid w-64 transform -rotate-3 mb-6 md:mb-0">
                   <div className="tape bg-yellow-200/60"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1520483602335-3b3dd1c0c07d?auto=format&fit=crop&w=400&q=80"
-                    alt="First Broadcast"
+                    src="app/about-us/img1.jpeg"
+                    alt="Trolls Trails~"
                   />
                   <div className="text-center mt-3 font-bold text-lg">
-                    First Broadcast
+                    Our Memories
                   </div>
                 </div>
                 <div className="description-paper p-6 w-full md:w-5/12 relative">
                   <div className="pin bg-red-600"></div>
-                  <h3 className="text-xl font-bold mb-2">20 Mei 1963</h3>
+                  <h3 className="text-xl font-bold mb-2">27 September 2025</h3>
                   <p className="leading-snug text-lg">
-                    Awal mula 8EH mengudara! Mahasiswa Teknik Elektro ITB
-                    menggunakan pemancar bekas AL Jepang. Resmi jadi radio FM
-                    kedua di Indonesia.
+                    Cakru 31 pertama kali menerima Pelatihan Terpusat di Regenerasi.
                   </p>
                 </div>
               </div>
@@ -623,19 +619,18 @@ export default function AboutPage() {
                 <div className="polaroid w-64 transform rotate-2 mb-6 md:mb-0">
                   <div className="tape bg-pink-200/60"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=400&q=80"
-                    alt="Community Era"
+                    src="app/about-us/img4.jpeg"
+                    alt="Fun Moments"
                   />
                   <div className="text-center mt-3 font-bold text-lg">
-                    Community Era
+                    Our Memories
                   </div>
                 </div>
                 <div className="description-paper p-6 w-full md:w-5/12 relative">
                   <div className="pin bg-blue-600"></div>
-                  <h3 className="text-xl font-bold mb-2">Tahun 90-an</h3>
+                  <h3 className="text-xl font-bold mb-2">28 Oktober 2025</h3>
                   <p className="leading-snug text-lg">
-                    Era kejayaan komunitas! Menjadi pusat informasi dan hiburan
-                    paling hits untuk anak muda Bandung dan mahasiswa ITB.
+                    Training Divisi pertama dari Cakru 31! Langkah awal dari Cakru 31 untuk mengasah bakat mereka di divisi terkait.
                   </p>
                 </div>
               </div>
@@ -646,19 +641,18 @@ export default function AboutPage() {
                 <div className="polaroid w-64 transform -rotate-1 mb-6 md:mb-0">
                   <div className="tape bg-green-200/60"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=400&q=80"
-                    alt="Digital Era"
+                    src="app/about-us/img2.jpeg"
+                    alt="Happy Vibes"
                   />
                   <div className="text-center mt-3 font-bold text-lg">
-                    Spark 31 Radio
+                    Our Memories
                   </div>
                 </div>
                 <div className="description-paper p-6 w-full md:w-5/12 relative">
                   <div className="pin bg-red-600"></div>
-                  <h3 className="text-xl font-bold mb-2">Sekarang</h3>
+                  <h3 className="text-xl font-bold mb-2">13 Desember 2025</h3>
                   <p className="leading-snug text-lg">
-                    Transformasi menjadi Spark 31 Radio. Membawa semangat baru,
-                    wajah baru, tapi tetap satu keluarga ITB.
+                    Transformasi menjadi Spark 31 Radio, siap untuk berkarya bersama di Jalur Warna yang cerah!
                   </p>
                 </div>
               </div>
