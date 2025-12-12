@@ -1,20 +1,26 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CountdownBox() {
   const [timeLeft, setTimeLeft] = useState("");
+  const targetRef = useRef(null);
 
   useEffect(() => {
-    let saved = localStorage.getItem("spark31-countdown");
-    let targetDate;
+    // Load or create target once
+    if (!targetRef.current) {
+      const saved = localStorage.getItem("spark31-countdown");
 
-    if (saved) {
-      targetDate = new Date(saved);
-    } else {
-      targetDate = new Date();
-      targetDate.setFullYear(targetDate.getFullYear() + 1);
-      localStorage.setItem("spark31-countdown", targetDate.toISOString());
+      if (saved) {
+        targetRef.current = new Date(saved);
+      } else {
+        const newDate = new Date();
+        newDate.setFullYear(newDate.getFullYear() + 1);
+        localStorage.setItem("spark31-countdown", newDate.toISOString());
+        targetRef.current = newDate;
+      }
     }
+
+    const targetDate = targetRef.current;
 
     const timer = setInterval(() => {
       const now = Date.now();
