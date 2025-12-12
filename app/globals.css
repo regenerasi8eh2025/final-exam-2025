@@ -62,5 +62,170 @@ body {
   }
 }
 
+.nextbutton {
+  text-align: center;
+  background-color: rgb(226, 184, 184);
+  color:rgb(52, 48, 48);
+  padding: 14px;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  width: 30%;
+  margin-top: 10px;
+  font-size: 17px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+}
+
+.pertanyaan h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+  color: #180303;
+  text-align: center;
+}
+
+.quiz-container {
+  display: flex;           
+  flex-direction: column;  
+  align-items: center;     
+  justify-content: center; 
+  width: 100%;             
+  text-align: center;      
+}
+
+.option-button {
+  background-color: rgb(240, 218, 218);
+  color: rgb(52, 48, 48);
+  padding: 14px;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  width: 40%;
+  margin-bottom: 10px;
+  font-size: 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.options-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.option-button.selected {
+  background-color: rgb(194, 150, 150);
+  color: white;
+}
+
+    body { background: transparent !important; }
+    :root { --maxW:1200px; --muted:#6b7280; --accent:#ff7a4a; --card:#fff; }
+    
+    /* Music Rain */
+    .music-rain{ position:absolute; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+    .music-rain .note{ position:absolute; top:-20px; transform-origin:center; opacity:0; font-size:18px; text-shadow:0 8px 16px rgba(15,23,42,0.1); }
+    .music-rain .note::before{ content:"♪"; color:rgba(255, 255, 255, 0.5); }
+    .music-rain .note:nth-child(2n)::before{ content:"♫"; font-size:22px; color:rgba(255, 255, 255, 0.6); }
+   
+    @keyframes fall{
+      0%{ transform:translateY(0) rotate(-8deg); opacity:0; }
+      10%{ opacity:1; }
+      85%{ opacity:1; }
+      100%{ transform:translateY(500px) rotate(12deg); opacity:0; } 
+    }
+
+    /* Background Toggle UI */
+    .bg-toggle{ background:rgba(255,255,255,0.8); padding:8px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); box-shadow:0 6px 18px rgba(15,23,42,0.06); }
+    .bg-toggle button{ border:none; background:transparent; cursor:pointer; padding:8px 12px; border-radius:8px; }
+
+    /* Carousel */
+    .team-wrap{ margin-top:28px; background:transparent; }
+    .carousel{ position:relative; overflow:hidden; border-radius:12px; }
+    .carousel-track{ display:flex; gap:18px; will-change:transform; transition:transform 420ms cubic-bezier(.2,.9,.2,1); padding:18px; }
+    .card{ flex:0 0 240px; background:var(--card); border-radius:12px; padding:12px; box-shadow:0 8px 30px rgba(15,23,42,0.06); text-align:center; transition: transform 0.3s ease; }
+    .card:hover { transform: translateY(-5px); }
+    .card img{ width:180px; height:180px; object-fit:cover; border-radius:14px; display:block; margin:6px auto; }
+    .card h4{ margin:8px 0 4px; font-size:16px; font-weight:bold; }
+    .card p.role{ color:var(--muted); margin:0; font-size:13px; }
+    .btn-icon{ background:white; border:1px solid #eee; padding:8px 12px; border-radius:8px; cursor:pointer; }
+    .btn-small{ padding: 6px 14px; border: 1px solid #eee; border-radius: 6px; background: white; cursor: pointer; font-size: 12px; font-weight:600; color: #4b5563; }
+
+    /* Modal */
+    .member-modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:9999; }
+    .member-backdrop{ position:absolute; inset:0; background:rgba(6,10,15,0.6); backdrop-filter: blur(2px); }
+    .member-panel{ position:relative; background:white; border-radius:12px; padding:24px; width:min(880px,94%); max-height:90vh; overflow:auto; z-index:2; box-shadow:0 30px 80px rgba(2,6,23,0.6); }
+    .member-panel img{ width:240px; height:240px; object-fit:cover; border-radius:12px; float:left; margin-right:24px; }
+
+    /* --- GAYA SCRAPBOOK (OUR JOURNEY) --- */
+    .scrapbook-font { font-family: 'Indie Flower', cursive; color: #5d4037; }
+    
+    .timeline-line-custom {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-image: linear-gradient(to bottom, #8d6e63 50%, transparent 50%);
+        background-size: 100% 20px;
+        transform: translateX(-50%);
+        z-index: 0;
+    }
+
+    .polaroid {
+        background: white;
+        padding: 12px 12px 35px 12px;
+        box-shadow: 3px 4px 12px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease;
+        position: relative;
+    }
+    .polaroid:hover { transform: scale(1.05) rotate(0deg) !important; z-index: 10; }
+    .polaroid img { width: 100%; height: auto; filter: sepia(15%); border: 1px solid #eee; }
+    
+    .tape {
+        width: 80px; height: 25px;
+        position: absolute; top: -10px; left: 50%;
+        transform: translateX(-50%) rotate(-3deg);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        z-index: 5;
+    }
+
+    .description-paper {
+        background-color: #fff8e1;
+        border-radius: 2px;
+        box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        position: relative;
+        border: 1px solid #f0f0f0;
+    }
+    
+    .pin {
+        width: 12px; height: 12px;
+        border-radius: 50%;
+        position: absolute; top: -6px; left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+    
+    @media (max-width:900px){
+      .card{ flex:0 0 170px; }
+      .card img{ width:140px; height:140px; }
+      .member-panel img { float:none; width:100%; height:auto; margin-bottom:16px; }
+      .timeline-line-custom { display: none; }
+    }
+  
+
 @tailwind base;
 @tailwind components;

@@ -21,7 +21,7 @@ const RESERVED = [
   "contributors",
 ];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const slug = pathname.split("/")[1];
 

@@ -1,9 +1,12 @@
+
 "use client";
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import ButtonPrimary from "@/app/components/ButtonPrimary";
 import { FiLock, FiEye, FiEyeOff } from "react-icons/fi";
+import Quiz from "@/app/components/quiz";
+
 
 export default function PasswordProtectedPage() {
   const params = useParams();

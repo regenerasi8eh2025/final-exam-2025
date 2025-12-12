@@ -34,7 +34,7 @@
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
     "styled-components": "^6.1.19",
-    "swiper": "^11.0.0",
+    "swiper": "^11.2.10",
     "swr": "^2.3.4",
     "wavesurfer.js": "^7.10.1"
   },
