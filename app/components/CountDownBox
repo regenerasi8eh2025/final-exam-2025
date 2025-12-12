@@ -5,8 +5,16 @@ export default function CountdownBox() {
   const [timeLeft, setTimeLeft] = useState("");
 
   useEffect(() => {
-    const targetDate = new Date();
-    targetDate.setFullYear(targetDate.getFullYear() + 1);
+    let saved = localStorage.getItem("spark31-countdown");
+    let targetDate;
+
+    if (saved) {
+      targetDate = new Date(saved);
+    } else {
+      targetDate = new Date();
+      targetDate.setFullYear(targetDate.getFullYear() + 1);
+      localStorage.setItem("spark31-countdown", targetDate.toISOString());
+    }
 
     const timer = setInterval(() => {
       const now = Date.now();
