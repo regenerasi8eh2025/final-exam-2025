@@ -39,7 +39,7 @@ const allProgramsData = [
   {
     title: "LOVE 4.0 U",
     genre: "Romance",
-    thumbnail: "/LOVE-4.0-U.png",
+    thumbnail: "/LOVE4.0U.png",
     description: "Membahas soal berbagai macam masalah percintaan di era digital..."
   },
   {
