@@ -276,7 +276,7 @@ const UpcomingEvents = () => {
 
         {/* Event detail */}
         {selectedDay && (
-          <div className="mt-8 bg-white p-6 rounded-2xl shadow-xl border border-red-200 animate-slide-in-up">
+          <div className="mt-8 bg-white/50 backdrop-blur-sm p-6 rounded-2xl shadow-xl border border-red-200 animate-slide-in-up">
             <h3 className="text-2xl font-bold text-red-600 mb-4">Events on {selectedDay} December</h3>
 
             {eventsByDate[selectedDay].map((event, idx) => (
@@ -366,9 +366,10 @@ export default function Home() {
         className="fixed inset-0 z-0 opacity-50" 
         style={{ 
           backgroundImage: 'url("/background.png")', 
-          backgroundRepeat: 'repeat-y', 
+          backgroundRepeat: 'repeat-y',
+          backgroundAttachment: 'fixed', 
           backgroundSize: '100% auto', 
-          backgroundPosition: 'top center'
+          backgroundPosition: 'top center',
         }}
       >
       </div>
