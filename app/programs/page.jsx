@@ -37,7 +37,7 @@ const allProgramsData = [
     description: "Program siaran/podcast yang membahas tarik-ulur dunia percintaan..."
   },
   {
-    title: "LOVE4.0U",
+    title: "LOVE-4.0-U",
     genre: "Romance",
     thumbnail: "/LOVE4.0U.png",
     description: "Membahas soal berbagai macam masalah percintaan di era digital..."
