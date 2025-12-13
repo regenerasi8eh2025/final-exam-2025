@@ -45,14 +45,14 @@ const allProgramsData = [
   {
     title: "LOVE 4.0: Navigasi Hati di Era Notifikasi",
     genre: "Romance",
-    thumbnail: "/LOVE 4.0 U.png",
+    thumbnail: "/LOVE_4.0_U.png",
     description: "Siap nemenin Kampus Mania bahas cinta era digital yang bikin deg-degan tiap notifikasi masuk! 💘📱🔥",
   },
   {
     title: "NGIBUL : Ngobrol Asik Bebas Gaul",
     genre: "Gen Z",
     thumbnail: "/Ngibul3.png",
-    description: "TNGIBUL hadir jadi ruang aman Gen Z buat ngebahas label “generasi santuy” dan realitanya! 🎙✨",
+    description: "TNGIBUL hadir jadi ruang aman Gen Z buat ngebahas label “generasi santuy” dan realitanya! 🎙️✨",
   },
   {
     title: "SDGS : Santai Dulu Ga Sih...",
@@ -64,7 +64,7 @@ const allProgramsData = [
     title: "MASK : Misteri Asik Seputar Kriminal",
     genre: "Mystery",
     thumbnail: "/Mask.png",
-    description: "Kupas tuntas fakta stalking yang bisa berubah dari ketertarikan jadi obsesi berbahaya! ⚠🎭",
+    description: "Kupas tuntas fakta stalking yang bisa berubah dari ketertarikan jadi obsesi berbahaya! ⚠️🎭",
   },
   {
     title: "TKP : Tempat Kupas Peristiwa",
@@ -112,20 +112,15 @@ const genreColors = {
 /* ===================== GENRE SECTION ===================== */
 const GenreSelectionSection = ({ selectedGenre, onGenreSelect }) => {
   return (
-    <section className="pb-10 bg-gradient-to-b from-yellow-300 to-white pt-16 relative overflow-hidden">
+    <section className="pb-10 pt-16 relative overflow-hidden bg-transparent">
 
       <div className="text-center mb-8">
         <Image src="/spark.png" width={300} height={200} alt="Spark Logo" className="mx-auto" />
       </div>
 
-      {!selectedGenre && (
-        <div className="text-center text-xl text-gray-600 mb-10 animate-fade-in">
-          Tentukan sesuai mood kalian!
-        </div>
-      )}
 
       <div className="text-center mb-10">
-        <Image src="/mood.png" width={260} height={80} alt="Mood Label" className="mx-auto" />
+        <Image src="/mood.png" width={405} height={205} alt="Mood Label" className="mx-auto" />
       </div>
 
       <div className="max-w-5xl mx-auto px-4 relative">
@@ -137,12 +132,13 @@ const GenreSelectionSection = ({ selectedGenre, onGenreSelect }) => {
             nextEl: ".swiper-button-next-custom",
             prevEl: ".swiper-button-prev-custom",
           }}
-          slidesPerView={2.3}
-          spaceBetween={4}
+          slidesPerView={4}
+          spaceBetween={20}
+          centeredSlides={false}
           breakpoints={{
-            640: { slidesPerView: 3.1, spaceBetween: 6 },
-            1024: { slidesPerView: 4.1, spaceBetween: 8 },
-            1280: { slidesPerView: 5, spaceBetween: 10 },
+            640: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 20 },
+            1280: { slidesPerView: 5, spaceBetween: 20 },
           }}
           className="py-8"
         >
@@ -152,7 +148,7 @@ const GenreSelectionSection = ({ selectedGenre, onGenreSelect }) => {
               onClick={() => onGenreSelect(item.name)}
               className="flex justify-center cursor-pointer !overflow-hidden"
             >
-              <div className="rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-[220px] h-[140px] flex items-center justify-center bg-white overflow-hidden">
+              <div className="rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full max-w-[320px] h-[140px] flex items-center justify-center bg-white overflow-hidden">
 
                 <Image
                   src={item.img}
@@ -191,7 +187,7 @@ const FilteredProgramsList = ({ selectedGenre }) => {
   const filtered = allProgramsData.filter((p) => p.genre === selectedGenre);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-16 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-4xl font-extrabold text-gray-900 mb-8 text-center animate-bounce hover:text-red-600 transition-all duration-500">
           Program {selectedGenre}
@@ -213,9 +209,6 @@ const FilteredProgramsList = ({ selectedGenre }) => {
                   />
                 </div>
               </div>
-
-
-
               <h3 className="text-xl font-bold group-hover:text-red-600 transition-colors">{program.title}</h3>
               <p className="text-sm text-gray-600 mt-2">{program.description}</p>
 
@@ -244,7 +237,7 @@ const UpcomingEvents = () => {
   const daysInMonth = 31;
 
   return (
-    <section className="py-16 bg-gradient-to-b from-red-50 to-white relative">
+    <section className="py-16 relative bg-transparent">
       <div className="absolute inset-0 bg-gradient-to-r from-yellow-100 via-red-100 to-pink-100 opacity-30 animate-pulse"></div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -272,7 +265,7 @@ const UpcomingEvents = () => {
                 {hasEvent && (
                   <div className="flex mt-1 gap-1">
                     {eventsByDate[day].map((e, i) => (
-                      <span key={i} className={w-4 h-4 rounded-full ${genreColors[e.genre]}}></span>
+                      <span key={i} className={`w-4 h-4 rounded-full ${genreColors[e.genre]}`}></span>
                     ))}
                   </div>
                 )}
@@ -295,7 +288,7 @@ const UpcomingEvents = () => {
                   <div className="font-semibold text-gray-800">{event.title}</div>
                   <div className="text-sm text-gray-600">{event.time}</div>
                 </div>
-                <span className={w-6 h-6 rounded-full ${genreColors[event.genre]}}></span>
+                <span className={`w-6 h-6 rounded-full ${genreColors[event.genre]}`}></span>
               </div>
             ))}
           </div>
@@ -307,7 +300,7 @@ const UpcomingEvents = () => {
 
 /* ===================== CONTACT ===================== */
 const ContactSection = () => (
-  <section className="py-24 bg-gradient-to-b from-white to-red-50 relative">
+  <section className="py-24 relative bg-transparent">
     <div className="absolute inset-0 bg-gradient-to-r from-red-100 via-pink-100 to-purple-100 opacity-50"></div>
 
     <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -368,13 +361,26 @@ export default function Home() {
   const [selectedGenre, setSelectedGenre] = useState(null);
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar sticky={true} />
-      <GenreSelectionSection selectedGenre={selectedGenre} onGenreSelect={setSelectedGenre} />
-      <FilteredProgramsList selectedGenre={selectedGenre} />
-      <UpcomingEvents />
-      <ContactSection />
-      <FooterSection />
+    <div className="min-h-screen relative bg-white"> 
+      <div 
+        className="fixed inset-0 z-0 opacity-50" 
+        style={{ 
+          backgroundImage: 'url("/background.png")', 
+          backgroundRepeat: 'repeat-y', 
+          backgroundSize: '100% auto', 
+          backgroundPosition: 'top center'
+        }}
+      >
+      </div>
+
+      <div className="relative z-10">
+        <Navbar sticky={true} />
+        <GenreSelectionSection selectedGenre={selectedGenre} onGenreSelect={setSelectedGenre} />
+        <FilteredProgramsList selectedGenre={selectedGenre} />
+        <UpcomingEvents />
+        <ContactSection />
+        <FooterSection />
+      </div>
     </div>
   );
 }
