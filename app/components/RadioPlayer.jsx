@@ -8,6 +8,8 @@ const RadioPlayer = ({ className = "", showTitle = true, compact = false }) => {
   const [isBuffering, setIsBuffering] = useState(false);
   const audioRef = useRef(null);
   const playPromiseRef = useRef(null);
+  const reconnectTimeoutRef = useRef(null);
+  const stalledTimeoutRef = useRef(null);
 
   const {
     streamUrl,
@@ -57,7 +59,7 @@ const RadioPlayer = ({ className = "", showTitle = true, compact = false }) => {
       );
     };
 
-    const handlePause = () => {
+    const handleAudioPause = () => {
       setIsPlaying(false);
       // Notify other components about pause state
       window.dispatchEvent(
@@ -87,6 +89,18 @@ const RadioPlayer = ({ className = "", showTitle = true, compact = false }) => {
 
     const handleStalled = () => {
       setIsBuffering(true);
+      // Set a timeout to detect if stalled condition persists
+      if (stalledTimeoutRef.current) {
+        clearTimeout(stalledTimeoutRef.current);
+      }
+      stalledTimeoutRef.current = setTimeout(() => {
+        console.warn("Stream stalled for too long, attempting to reconnect...");
+        // Trigger reconnection
+        if (isPlaying && audio) {
+          console.log("Reconnecting stalled stream...");
+          handleStreamError();
+        }
+      }, 15000); // 15 seconds of stalling triggers reconnect
     };
 
     const handleEnded = () => {
@@ -105,7 +119,7 @@ const RadioPlayer = ({ className = "", showTitle = true, compact = false }) => {
     audio.addEventListener("loadeddata", handleLoadedData);
     audio.addEventListener("waiting", handleWaiting);
     audio.addEventListener("playing", handlePlaying);
-    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("pause", handleAudioPause);
     audio.addEventListener("error", handleError);
     audio.addEventListener("abort", handleAbort);
     audio.addEventListener("stalled", handleStalled);
@@ -117,30 +131,21 @@ const RadioPlayer = ({ className = "", showTitle = true, compact = false }) => {
       audio.removeEventListener("loadeddata", handleLoadedData);
       audio.removeEventListener("waiting", handleWaiting);
       audio.removeEventListener("playing", handlePlaying);
-      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("pause", handleAudioPause);
       audio.removeEventListener("error", handleError);
       audio.removeEventListener("abort", handleAbort);
       audio.removeEventListener("stalled", handleStalled);
       audio.removeEventListener("ended", handleEnded);
+      // Cleanup timeout refs
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+      }
+      if (stalledTimeoutRef.current) {
+        clearTimeout(stalledTimeoutRef.current);
+      }
     };
   }, [handleStreamError]);
 
-  // Listen for external play/pause triggers (from navbar)
-  useEffect(() => {
-    const handlePlayerControl = () => {
-      if (isPlaying) {
-        handlePause();
-      } else {
-        handlePlay();
-      }
-    };
-
-    window.addEventListener("triggerPlayerControl", handlePlayerControl);
-
-    return () => {
-      window.removeEventListener("triggerPlayerControl", handlePlayerControl);
-    };
-  }, [isPlaying]);
 
   // Handle play with proper promise handling
   const handlePlay = async () => {
@@ -153,6 +158,11 @@ const RadioPlayer = ({ className = "", showTitle = true, compact = false }) => {
         await playPromiseRef.current.catch(() => {});
       }
 
+      // Cancel any pending reconnection
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+      }
+
       // Generate fresh stream URL for new play attempt
       const freshUrl = getStreamUrl();
       audio.src = freshUrl;
@@ -163,12 +173,33 @@ const RadioPlayer = ({ className = "", showTitle = true, compact = false }) => {
       setIsLoading(true);
       setError("");
 
+      // Set a loading timeout - if we don't get canplay within 30 seconds, retry
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+      }
+      reconnectTimeoutRef.current = setTimeout(() => {
+        console.warn("Loading timeout, retrying...");
+        if (audio.paused === false) {
+          console.log("Retrying playback due to loading timeout");
+          handleStreamError();
+        }
+      }, 30000);
+
       // Start playing
       playPromiseRef.current = audio.play();
       await playPromiseRef.current;
 
       setIsPlaying(true);
+      // Clear the loading timeout once play succeeds
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+      }
     } catch (playError) {
+      // Clear loading timeout on error
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+      }
+
       console.error("Play error:", playError);
       setIsPlaying(false);
       setIsLoading(false);
@@ -205,6 +236,23 @@ const RadioPlayer = ({ className = "", showTitle = true, compact = false }) => {
       setIsPlaying(false);
     }
   };
+
+  // Listen for external play/pause triggers (from navbar)
+  useEffect(() => {
+    const handlePlayerControl = () => {
+      if (isPlaying) {
+        handlePause();
+      } else {
+        handlePlay();
+      }
+    };
+
+    window.addEventListener("triggerPlayerControl", handlePlayerControl);
+
+    return () => {
+      window.removeEventListener("triggerPlayerControl", handlePlayerControl);
+    };
+  }, [isPlaying, handlePlay, handlePause]);
 
   const togglePlay = async () => {
     if (isPlaying) {

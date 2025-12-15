@@ -123,6 +123,52 @@ export default function Navbar() {
   }, [isPlaying, playStream, pauseStream]);
 
   /* ------------------------------------------------------------- */
+  /* Audio event listeners for error detection and recovery        */
+  /* ------------------------------------------------------------- */
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    let stalledTimeout = null;
+
+    const handleError = (e) => {
+      console.error("Navbar audio error:", e);
+      if (isPlaying) {
+        setIsPlaying(false);
+        setError("Stream error occurred. Retrying...");
+        handleStreamError();
+      }
+    };
+
+    const handleStalled = () => {
+      console.warn("Navbar audio stalled detected");
+      // If stalled for 15 seconds, trigger reconnect
+      if (stalledTimeout) clearTimeout(stalledTimeout);
+      stalledTimeout = setTimeout(() => {
+        if (isPlaying && audio.paused === false) {
+          console.log("Navbar audio stalled too long, reconnecting...");
+          handleStreamError();
+        }
+      }, 15000);
+    };
+
+    const handleCanPlay = () => {
+      if (stalledTimeout) clearTimeout(stalledTimeout);
+    };
+
+    audio.addEventListener("error", handleError);
+    audio.addEventListener("stalled", handleStalled);
+    audio.addEventListener("canplay", handleCanPlay);
+
+    return () => {
+      if (stalledTimeout) clearTimeout(stalledTimeout);
+      audio.removeEventListener("error", handleError);
+      audio.removeEventListener("stalled", handleStalled);
+      audio.removeEventListener("canplay", handleCanPlay);
+    };
+  }, [isPlaying, handleStreamError, setError]);
+
+  /* ------------------------------------------------------------- */
   /* Sync internal audio element events (optional future)          */
   /* ------------------------------------------------------------- */
   // could add listeners for ended/stalled etc if needed

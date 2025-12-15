@@ -59,7 +59,7 @@ export const useRadioStream = () => {
     return newUrl;
   }, [generateStreamUrl]);
 
-  // Handle stream errors with fallback logic
+  // Handle stream errors with fallback logic and exponential backoff
   const handleStreamError = useCallback(() => {
     setIsLoading(false);
 
@@ -74,19 +74,23 @@ export const useRadioStream = () => {
     }
 
     if (retryCount < STREAM_CONFIG.maxRetries) {
+      // Use exponential backoff: 2s, 4s, 8s
+      const delayMultiplier = Math.pow(2, retryCount - 1);
+      const delay = STREAM_CONFIG.retryDelay * delayMultiplier;
+
       setError(
-        `Connection failed. Retrying... (${retryCount + 1}/${STREAM_CONFIG.maxRetries})`,
+        `Connection lost. Retrying in ${Math.floor(delay / 1000)}s... (${retryCount + 1}/${STREAM_CONFIG.maxRetries})`,
       );
 
       setTimeout(() => {
         setRetryCount((prev) => prev + 1);
         const newUrl = generateStreamUrl();
         setStreamUrl(newUrl);
-      }, STREAM_CONFIG.retryDelay);
+      }, delay);
     } else {
       setError("Unable to connect to the radio stream. Please try refreshing.");
     }
-  }, [retryCount, generateStreamUrl, STREAM_CONFIG.fallbackUrl]);
+  }, [retryCount, generateStreamUrl, STREAM_CONFIG.fallbackUrl, STREAM_CONFIG.retryDelay, STREAM_CONFIG.maxRetries]);
 
   // Get stream URL with fresh session (tidak lagi menggunakan isIOS kondisional)
   const getStreamUrl = useCallback(() => {
